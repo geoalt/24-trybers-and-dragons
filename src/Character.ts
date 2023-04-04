@@ -1,6 +1,6 @@
 import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
-import Fighter from './Fighter';
+import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 import getRandomInt from './utils';
 
@@ -71,7 +71,7 @@ export default class Character implements Fighter {
     return this.lifePoints;
   }
 
-  attack(enemy: Fighter): void {
+  attack(enemy: SimpleFighter): void {
     const damage = this.strength;
     enemy.receiveDamage(damage);
   }
@@ -90,11 +90,10 @@ export default class Character implements Fighter {
     this._lifePoints = this._maxLifePoints;
   }
 
-  special(enemy: Fighter): void {
+  special(enemy: SimpleFighter): void {
     if (this.energy.amount >= 5) {
       const attack = this.strength + this.dexterity;
-      const damage = attack - enemy.defense;
-      const totalDamage = damage * getRandomInt(5, 15);
+      const totalDamage = attack * getRandomInt(5, 15);
       
       enemy.receiveDamage(totalDamage);
       this.energy.amount -= 5;
