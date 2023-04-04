@@ -1,12 +1,12 @@
 export default abstract class Race {
   private _name: string;
   private _dexterity: number;
-  private static _counter = 0;
+  private static totalRacesInstances = 0;
 
   constructor(name: string, dexterity: number) {
     this._name = name;
     this._dexterity = dexterity;
-    Race._counter += 1;
+    Race.totalRacesInstances += 1;
   }
 
   get name() {
@@ -21,6 +21,5 @@ export default abstract class Race {
 
   static createdRacesInstances(): number {
     throw new Error('Not implemented');
-    // return Race._counter;
   }
 }
