@@ -1,25 +1,16 @@
-import Character from '../Character';
 import Fighter, { SimpleFighter } from '../Fighter';
 import Battle from './Battle';
 
 export default class PVE extends Battle {
-  private _enemiesAlive: number;
   private _enemies: (SimpleFighter | Fighter)[];
-
-  player: Fighter = new Character('Um');
 
   constructor(player: Fighter, enemies: (SimpleFighter | Fighter)[]) {
     super(player);
     this._enemies = enemies;
-    this._enemiesAlive = enemies.length;
   }
 
   get enemies(): (SimpleFighter | Fighter)[] {
     return this._enemies;
-  }
-
-  get enemiesAlive(): number {
-    return this._enemiesAlive;
   }
 
   playerTurn(): void {
@@ -38,7 +29,7 @@ export default class PVE extends Battle {
 
   fight(): number {
     while (this.player.lifePoints !== -1 
-      && this.enemies.some((enemy) => enemy.lifePoints > 0)) {
+      && this.enemies.every((enemy) => enemy.lifePoints !== -1)) {
       this.playerTurn();
       this.enemyTurn();
     }
