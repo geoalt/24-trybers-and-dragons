@@ -91,16 +91,17 @@ export default class Character implements Fighter {
   }
 
   special(enemy: SimpleFighter): void {
-    if (this.energy.amount >= 5) {
+    if (this.energy.amount > 0) {
       const attack = this.strength + this.dexterity;
       const totalDamage = attack * getRandomInt(5, 15);
       
       enemy.receiveDamage(totalDamage);
-      this.energy.amount -= 5;
+      this.energy.amount -= 1;
       
       console.log('Special attack:', totalDamage);
     } else {
-      console.log('Not mana!');
+      enemy.receiveDamage(0);
+      console.log('No mana!');
     }
   }
 }

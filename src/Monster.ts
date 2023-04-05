@@ -1,4 +1,3 @@
-import Character from './Character';
 import { SimpleFighter } from './Fighter';
 
 export default class Monster implements SimpleFighter {
@@ -33,12 +32,3 @@ export default class Monster implements SimpleFighter {
     enemy.receiveDamage(damage);
   }
 }
-
-const a = new Character('a');
-const b = new Monster();
-
-console.log(a);
-console.log(b.lifePoints);
-console.log(a.special(b));
-
-console.log(b.lifePoints);
